@@ -10,6 +10,8 @@ import torch
 import pose_estimation
 import cv2
 
+import pdb
+
 limbSeq = [[3,4], [4,5], [6,7], [7,8], [9,10], [10,11], [12,13], [13,14], [1,2], [2,9], [2,12], [2,3], [2,6], \
            [3,17],[6,18],[1,16],[1,15],[16,18],[15,17]]
 
@@ -37,7 +39,10 @@ def construct_model(args):
     for k, v in state_dict.items():
         name = k[7:]
         new_state_dict[name] = v
-    state_dict = model.state_dict()
+    try: 
+        state_dict = model.state_dict()
+    except: 
+        pdb.set_trace()
     state_dict.update(new_state_dict)
     model.load_state_dict(state_dict)
     model = model.cuda()

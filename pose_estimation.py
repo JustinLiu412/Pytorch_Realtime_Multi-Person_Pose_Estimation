@@ -5,6 +5,8 @@ import sys
 import math
 import torchvision.models as models
 
+import pdb
+
 class Pose_Estimation(nn.Module):
 
     def __init__(self, net_dict, batch_norm=False):
@@ -44,9 +46,10 @@ class Pose_Estimation(nn.Module):
 
         layers = []
         length = len(net_dict) - 1
+        
         for i in range(length):
             one_layer = net_dict[i]
-            key = one_layer.keys()[0]
+            key = list(one_layer.keys())[0]
             v = one_layer[key]
 
             if 'pool' in key:
@@ -60,7 +63,7 @@ class Pose_Estimation(nn.Module):
 
         if last_activity:
             one_layer = net_dict[-1]
-            key = one_layer.keys()[0]
+            key = list(one_layer.keys())[0]
             v = one_layer[key]
 
             conv2d = nn.Conv2d(in_channels=v[0], out_channels=v[1], kernel_size=v[2], stride=v[3], padding=v[4])
@@ -70,7 +73,7 @@ class Pose_Estimation(nn.Module):
                 layers += [conv2d, nn.ReLU(inplace=True)]
         else:
             one_layer = net_dict[-1]
-            key = one_layer.keys()[0]
+            key = list(one_layer.keys())[0]
             v = one_layer[key]
 
             conv2d = nn.Conv2d(in_channels=v[0], out_channels=v[1], kernel_size=v[2], stride=v[3], padding=v[4])

@@ -295,7 +295,8 @@ def process(model, input_path):
     canvas = cv2.imread(input_path)
     for i in range(18):
         for j in range(len(all_peaks[i])):
-            cv2.circle(canvas, all_peaks[i][j][0:2], 4, colors[i], thickness=-1)
+            if i == 17: 
+                cv2.circle(canvas, all_peaks[i][j][0:2], 4, colors[i], thickness=-1)
 
     # draw lines
     for i in range(17):

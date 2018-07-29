@@ -289,6 +289,8 @@ def process(model, input_path):
             deleteIdx.append(i)
     subset = np.delete(subset, deleteIdx, axis=0)
 
+    pdb.set_trace()
+
     # draw points
     canvas = cv2.imread(input_path)
     for i in range(18):

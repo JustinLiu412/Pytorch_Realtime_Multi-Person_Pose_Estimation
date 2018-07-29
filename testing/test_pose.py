@@ -49,12 +49,12 @@ def construct_model(args):
     from collections import OrderedDict
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
-        name = k[7:]
+        # name = k[7:]
+        name = k
         new_state_dict[name] = v
     state_dict = model.state_dict()
     state_dict.update(new_state_dict)
-    state_dict = trim_state_dict(state_dict)
-    
+#     state_dict = trim_state_dict(state_dict)    
     model.load_state_dict(state_dict)
     model = model.cuda()
     model.eval()
